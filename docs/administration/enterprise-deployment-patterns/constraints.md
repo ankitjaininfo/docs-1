@@ -4,7 +4,7 @@ description: Details on the constraints on an Octopus instance that impact how O
 position: 1
 ---
 
-Octopus is subject to constraints that are factors in determining how it is scaled within an enterprise.
+Octopus is subject to constraints that factor into determining how it is scaled within an enterprise.
 
 ## Task Caps
 
@@ -12,29 +12,29 @@ Every task run by an Octopus node is placed within a shared task queue. This que
 
 Octopus has no built-in functionality to prioritize, weight, or reorder the task queue.
 
-This means that teams sharing an Octopus instance or cluster are all competing for use of the shared task queue. It is possible for one team to schedule many tasks, which means subsequent tasks can take some time to process. This is the "noisy neighbor" problem.
+This means that teams sharing an Octopus instance or HA cluster are all competing for use of the shared task queue. It is possible for one team to schedule many tasks, which means subsequent tasks can take some time to process. This is the "noisy neighbor" problem.
 
 ## Database Latency
 
-Each Octopus installations requires a low latency connection to the database. This means Octopus nodes must be collocated in a single region or location.
+Each Octopus installation requires a low latency connection to the database. This means Octopus nodes must be collocated in a single region or location.
 
-Geographically disperse teams that require Octopus to be physically close to their users or targets are therefore required to install multiple Octopus installations.
+Geographically disperse teams that require Octopus to be physically close to their users or targets are therefore required to manage multiple Octopus installations.
 
 ## Import/Export
 
 The import/export feature facilitate teams moving to cloud or other on-premises Octopus installations, or between spaces.
 
-The documentation specifically calls out that the import/export process is not designed for promoting changes between Octopus installations or spaces. Notably, a project is not imported if it already exists.
+[The import/export process is not designed for promoting changes between Octopus installations or spaces](https://www.octopus.com/docs/projects/export-import#scenarios). Notably, a project is not imported if it already exists.
 
 The import/export tool also does not affect many Octopus resources. For example, it will not create targets, workers, triggers, general Octopus settings, insights dashboards etc.
 
-This means the import/export feature is not a suitable solution for maintaining shared resources across Octopus spaces or installations.
+This means the import/export feature is not a suitable solution for maintaining shared resources across Octopus spaces r installations.
 
 ## Terraform Provider
 
 The Terraform Provider allows an Octopus installation to be configured via Terraform. It enables an Infrastructure as Code (IaC) approach to managing Octopus.
 
-As noted on the Unsupported Configuration as Code Scenarios documentation, the provider is the recommended solution for keeping multiple Octopus installations in sync.
+[As noted on the Unsupported Configuration as Code Scenarios documentation](https://www.octopus.com/docs/projects/version-control/unsupported-config-as-code-scenarios#syncing-multiple-instances), the provider is the recommended solution for keeping multiple Octopus installations in sync.
 
 ## Step Templates
 
@@ -46,7 +46,7 @@ However, step templates are limited to single steps, and so have no ability to c
 
 Config-as-Code allows deployments to persist their configuration in a Git repository. This allows changes to be managed in branches and enables a pull-request workflow for implementing changes.
 
-Config-as-Code does not allow multiple projects to reference the same directory in a Git repository. This means Config-as-Code has no intrinsic functionality to share configuration between projects.
+[Config-as-Code does not allow multiple projects to reference the same directory in a Git repository](https://octopus.com/docs/projects/version-control/unsupported-config-as-code-scenarios#syncing-multiple-instances). This means Config-as-Code has no intrinsic functionality to share configuration between projects.
 
 ## Octopus DSC
 
